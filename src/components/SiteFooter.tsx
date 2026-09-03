@@ -2,10 +2,25 @@ import { useReveal } from '../hooks/useReveal';
 import { siteConfig, footerColumns } from '../data/content';
 import type { FooterCol } from '../data/types';
 
-function FooterColumnBlock({ col, delay }: { col: FooterCol; delay: number }) {
+function FooterColumnBlock({
+  col,
+  delay,
+  paired,
+}: {
+  col: FooterCol;
+  delay: number;
+  paired?: boolean;
+}) {
   const { ref, style } = useReveal<HTMLDivElement>(delay);
   return (
-    <div ref={ref} style={{ ...style, flex: '1 1 180px', minWidth: '160px' }}>
+    <div
+      ref={ref}
+      style={{
+        ...style,
+        flex: paired ? '1 1 110px' : '1 1 180px',
+        minWidth: paired ? '110px' : '160px',
+      }}
+    >
       <p className="eyebrow">{col.heading}</p>
       <ul
         style={{
@@ -65,9 +80,21 @@ export function SiteFooter() {
                 Every vehicle treated like our own.
               </p>
             </div>
-            {footerColumns.map((col, i) => (
-              <FooterColumnBlock key={col.heading} col={col} delay={80 * (i + 1)} />
-            ))}
+            {/* Services + Studio are kept as a fixed pair — sit side by side at every
+                width, including mobile, rather than each stacking to full width. */}
+            <div
+              style={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                gap: '32px 24px',
+                flex: '1 1 300px',
+                minWidth: 'min(100%, 260px)',
+              }}
+            >
+              {footerColumns.map((col, i) => (
+                <FooterColumnBlock key={col.heading} col={col} delay={80 * (i + 1)} paired />
+              ))}
+            </div>
             <div
               ref={contact.ref}
               style={{ ...contact.style, flex: '1 1 180px', minWidth: '160px' }}
