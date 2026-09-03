@@ -60,6 +60,7 @@ export function Hero() {
             aspect="1214 / 670"
             caption="HERO IMAGE — WRAPPED MERCEDES E-CLASS"
             parallax
+            className="hero-image-frame"
             frameRef={frameRef}
             fillRef={fillRef}
           />

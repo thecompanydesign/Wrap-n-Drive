@@ -189,7 +189,7 @@
 
 .mobile-menu__link {
   font-size: 17px;
-  padding: 14px clamp(20px, 7.8vw, 112px);
+  padding: 14px var(--outer-pad);
   border-top: 1px solid var(--rule);
   transition: background-color 0.4s ease, padding-left 0.4s var(--ease-expo);
 }
@@ -197,12 +197,12 @@
 .mobile-menu__link:hover,
 .mobile-menu__link:focus-visible {
   background: var(--tint);
-  padding-left: calc(clamp(20px, 7.8vw, 112px) + 8px);
+  padding-left: calc(var(--outer-pad) + 8px);
   outline: none;
 }
 
 .mobile-menu__cta {
-  margin: 20px clamp(20px, 7.8vw, 112px) 0;
+  margin: 20px var(--outer-pad) 0;
 }
 
 .mobile-menu__cta .btn-solid {
@@ -413,6 +413,16 @@
 .image-frame__fill--parallax {
   transform: scale(1.06);
   will-change: transform;
+}
+
+/* IMPLEMENTATION OVERRIDE: hero frame is more prominent on small screens —
+   the original 1214/670 ratio reads as a thin strip on a narrow viewport,
+   so it steps to a taller ratio below 600px. !important is required only
+   because the base ratio is set inline (aspect prop) on ImageFrame. */
+@media (max-width: 600px) {
+  .hero-image-frame {
+    aspect-ratio: 4 / 3 !important;
+  }
 }
 
 /* ============================================================

@@ -44,8 +44,11 @@
 
   /* Geometry */
   --page-max: 1440px;
-  --outer-pad: clamp(20px, 7.8vw, 112px);
-  --inner-pad: clamp(0px, 2.1vw, 30px);
+  /* IMPLEMENTATION OVERRIDE: tightened from clamp(20px,7.8vw,112px) — user asked
+     for less horizontal margin at every breakpoint, content should fill more
+     of the viewport. */
+  --outer-pad: clamp(16px, 5vw, 72px);
+  --inner-pad: clamp(0px, 1.4vw, 20px);
 
   /* Z-index */
   --z-content: 0;
