@@ -1,0 +1,369 @@
+<title>Dark Mode Palette</title>
+<style>
+  :root{
+    --page-bg:#ffffff; --page-ink:#111111; --page-body:#6f6f6f; --page-muted:#8a8a8a;
+    --page-rule:#e6e6e6; --page-accent:#e8261c;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --page-bg:#0a0a0a; --page-ink:#f5f5f5; --page-body:#a8a8a8; --page-muted:#8c8c8c;
+      --page-rule:#242424; --page-accent:#e8261c;
+    }
+  }
+  :root[data-theme="dark"]{
+    --page-bg:#0a0a0a; --page-ink:#f5f5f5; --page-body:#a8a8a8; --page-muted:#8c8c8c;
+    --page-rule:#242424; --page-accent:#e8261c;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:var(--page-bg); color:var(--page-ink);
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+    padding:clamp(28px,5vw,64px) clamp(20px,6vw,72px) 80px;
+  }
+  .wrap{max-width:1180px;margin:0 auto}
+  .eyebrow{font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--page-muted)}
+  h1{font-size:clamp(32px,4.4vw,52px);font-weight:700;letter-spacing:-0.03em;line-height:1.03;margin-top:14px}
+  .intro{font-size:16px;line-height:1.65;color:var(--page-body);max-width:62ch;margin-top:22px}
+  .accent{color:var(--page-accent)}
+
+  .callout{
+    margin-top:44px; border:1px solid var(--page-rule); border-radius:12px;
+    padding:26px 28px; display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:24px;
+  }
+  .callout h3{font-size:13px;font-weight:600;letter-spacing:-0.01em;margin-bottom:8px}
+  .callout p{font-size:14px;line-height:1.6;color:var(--page-body)}
+
+  section.block{margin-top:64px}
+  .block > .eyebrow{margin-bottom:10px}
+  .block h2{font-size:clamp(22px,2.6vw,28px);font-weight:700;letter-spacing:-0.02em}
+  .block .sub{font-size:14px;color:var(--page-body);margin-top:8px;max-width:60ch;line-height:1.6}
+
+  /* ---- token table ---- */
+  .group{margin-top:32px}
+  .group-title{
+    font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--page-muted); padding-bottom:8px; border-bottom:1px solid var(--page-rule);
+  }
+  table{width:100%;border-collapse:collapse;margin-top:2px}
+  tr{border-bottom:1px solid var(--page-rule)}
+  td{padding:12px 10px;font-size:13.5px;vertical-align:middle}
+  td:first-child{padding-left:0}
+  td:last-child{padding-right:0}
+  .tok-name{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:12.5px;color:var(--page-ink)}
+  .tok-use{color:var(--page-body);font-size:12.5px;margin-top:3px;line-height:1.4;max-width:34ch}
+  .swatch-cell{white-space:nowrap}
+  .chip{display:inline-block;vertical-align:middle;width:22px;height:22px;border-radius:6px;border:1px solid rgba(128,128,128,.35);margin-right:10px}
+  .hex{display:inline-block;vertical-align:middle;font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:12px;color:var(--page-body)}
+  th{text-align:left;font-size:10.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--page-muted);padding:0 10px 10px;border-bottom:1px solid var(--page-rule)}
+  th:first-child{padding-left:0}
+
+  /* ---- live preview panels ---- */
+  .panels{display:grid;grid-template-columns:repeat(auto-fit,minmax(420px,1fr));gap:28px;margin-top:32px}
+  .panel{border-radius:14px;overflow:hidden;border:1px solid var(--page-rule)}
+  .panel-label{
+    font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+    padding:12px 20px;border-bottom:1px solid var(--rule);
+  }
+
+  /* mini design-system, driven by the same token names as the real site */
+  .demo{
+    background:var(--white); color:var(--ink);
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+    padding:0 0 28px;
+  }
+  .demo-nav{
+    display:flex;align-items:center;justify-content:space-between;gap:16px;
+    padding:16px 20px;border-bottom:1px solid var(--rule);
+  }
+  .demo-logo{font-size:15px;font-weight:800;font-style:italic;letter-spacing:-0.02em}
+  .demo-logo b{color:var(--accent);font-weight:800}
+  .demo-links{display:flex;gap:16px;font-size:12.5px;color:var(--ink)}
+  .demo-cta{
+    background:var(--ink-btn);color:var(--btn-text);font-size:12px;padding:8px 14px;border-radius:999px;
+  }
+  .demo-hero{padding:26px 20px 6px}
+  .demo-h1{font-size:26px;font-weight:700;line-height:.98;letter-spacing:-0.03em}
+  .demo-h1 .ghost{color:var(--hero-ghost)}
+  .demo-p{font-size:13px;line-height:1.6;color:var(--body);max-width:32ch;margin-top:12px}
+  .demo-btns{display:flex;gap:14px;align-items:center;margin-top:16px}
+  .demo-btn-solid{background:var(--ink-btn);color:var(--btn-text);font-size:12px;padding:9px 16px;border-radius:999px}
+  .demo-btn-text{font-size:12px;border-bottom:1px solid var(--ink);padding-bottom:1px}
+
+  .demo-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:22px 20px 0;align-items:center}
+  .demo-card{border:1px solid var(--rule);border-radius:10px;padding:14px}
+  .demo-card .num{font-size:9px;color:var(--price-numeral);letter-spacing:.05em}
+  .demo-card .lbl{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:2px}
+  .demo-card .price{font-size:16px;font-weight:700;margin-top:10px;letter-spacing:-0.02em}
+  .demo-card .feat{font-size:10.5px;color:var(--body);margin-top:10px}
+  .demo-card .go{margin-top:14px;font-size:10.5px;text-align:center;padding:7px 0;border-radius:999px;background:var(--ink-btn);color:var(--btn-text)}
+  .demo-card.emph{background:var(--ink-btn);border-color:var(--ink-btn)}
+  .demo-card.emph .num{color:var(--on-emph-secondary)}
+  .demo-card.emph .lbl{color:var(--on-emph-secondary)}
+  .demo-card.emph .price{color:var(--on-emph-primary)}
+  .demo-card.emph .feat{color:var(--on-emph-secondary)}
+  .demo-card.emph .go{background:var(--white);color:var(--ink)}
+  .demo-card.emph .chip{display:inline-block;font-size:8.5px;background:var(--ink-chip);color:var(--on-emph-primary);padding:3px 7px;border-radius:999px;margin-left:6px}
+
+  /* LIGHT token set */
+  .theme-light{
+    --white:#ffffff; --ink:#111111; --ink-btn:#0a0a0a; --ink-btn-hover:#242424; --ink-chip:#2a2a2a;
+    --body:#6f6f6f; --muted:#8a8a8a; --rule:#e6e6e6; --hero-ghost:#bcbcbc; --price-numeral:#c0c0c0;
+    --accent:#e8261c; --btn-text:#ffffff; --on-emph-primary:#ffffff; --on-emph-secondary:#9a9a9a;
+  }
+  /* DARK token set — the proposal */
+  .theme-dark{
+    --white:#0a0a0a; --ink:#f5f5f5; --ink-btn:#f5f5f5; --ink-btn-hover:#dcdcdc; --ink-chip:#e2e2e2;
+    --body:#a8a8a8; --muted:#8c8c8c; --rule:#262626; --hero-ghost:#444444; --price-numeral:#333333;
+    --accent:#e8261c; --btn-text:#0a0a0a; --on-emph-primary:#0a0a0a; --on-emph-secondary:#4a4a4a;
+  }
+  .theme-light .panel-label{background:#fafafa;color:#111}
+  .theme-dark .panel-label{background:#141414;color:#f5f5f5}
+
+  @media (max-width:600px){
+    .demo-cards{grid-template-columns:1fr}
+  }
+</style>
+
+<div class="wrap">
+  <p class="eyebrow">Colour proposal — for review before implementation</p>
+  <h1>Dark mode<br>for Wrap<span class="accent">&amp;</span>Drive.</h1>
+  <p class="intro">
+    The build spec never defined a dark palette, so this extends its own logic rather than inventing a
+    new one: same near-monochrome restraint, same single red accent, same hairline rules — just re-tuned
+    for a dark ground. Nothing here is a mechanical invert; every token was re-picked so it still does its
+    original job — heading, label, rule, ghost — at the right weight against black instead of white.
+  </p>
+
+  <div class="callout">
+    <div>
+      <h3>The accent doesn't move</h3>
+      <p><span class="hex" style="color:#e8261c">#e8261c</span> stays identical in both themes. It's the
+      one deliberate colour in an otherwise monochrome system — changing it per theme would make the logo
+      feel like two different brands.</p>
+    </div>
+    <div>
+      <h3>The black card flips polarity</h3>
+      <p>The pricing page's "black card" is only black because it's the one surface that must pop against
+      a <em>white</em> page. On a dark page that same job needs a <em>light</em> fill — so in dark mode it
+      becomes the white card. Same signature detail, same intent, inverted fill.</p>
+    </div>
+    <div>
+      <h3>Same token names, new values</h3>
+      <p>Every component already reads colour from a CSS custom property (<span class="tok-name">var(--ink)</span>,
+      <span class="tok-name">var(--rule)</span>…). Dark mode is a second value for each token, swapped by
+      a <span class="tok-name">[data-theme]</span> attribute — no component styles change.</p>
+    </div>
+  </div>
+
+  <section class="block">
+    <p class="eyebrow">Preview</p>
+    <h2>Built from the real tokens.</h2>
+    <p class="sub">Nav, hero and the pricing trio, each rendered twice from the same markup — only the token
+    values underneath change.</p>
+
+    <div class="panels">
+      <div class="panel">
+        <div class="panel-label">Light — current</div>
+        <div class="demo theme-light">
+          <div class="demo-nav">
+            <div class="demo-logo"><b>WRAP</b> &amp; <b>DRIVE</b></div>
+            <div class="demo-links"><span>Services</span><span>Portfolio</span><span>Pricing</span></div>
+            <div class="demo-cta">Get in touch</div>
+          </div>
+          <div class="demo-hero">
+            <div class="demo-h1">Your vehicle,<br><span class="ghost">reinvented.</span></div>
+            <p class="demo-p">Precision wraps, PPF and ceramic coatings — installed with an obsession for detail.</p>
+            <div class="demo-btns">
+              <div class="demo-btn-solid">Book a consultation →</div>
+              <div class="demo-btn-text">View portfolio →</div>
+            </div>
+          </div>
+          <div class="demo-cards">
+            <div class="demo-card">
+              <div class="num">01</div><div class="lbl">Accent</div>
+              <div class="price">35,000</div>
+              <div class="feat">Up to 3 panels</div>
+              <div class="go">Get a quote</div>
+            </div>
+            <div class="demo-card emph">
+              <div class="num">02 <span class="chip">Popular</span></div><div class="lbl">Full Wrap</div>
+              <div class="price">80,000</div>
+              <div class="feat">Full exterior</div>
+              <div class="go">Get a quote</div>
+            </div>
+            <div class="demo-card">
+              <div class="num">03</div><div class="lbl">Protection</div>
+              <div class="price">150,000</div>
+              <div class="feat">Full or zone PPF</div>
+              <div class="go">Get a quote</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-label">Dark — proposed</div>
+        <div class="demo theme-dark">
+          <div class="demo-nav">
+            <div class="demo-logo"><b>WRAP</b> &amp; <b>DRIVE</b></div>
+            <div class="demo-links"><span>Services</span><span>Portfolio</span><span>Pricing</span></div>
+            <div class="demo-cta">Get in touch</div>
+          </div>
+          <div class="demo-hero">
+            <div class="demo-h1">Your vehicle,<br><span class="ghost">reinvented.</span></div>
+            <p class="demo-p">Precision wraps, PPF and ceramic coatings — installed with an obsession for detail.</p>
+            <div class="demo-btns">
+              <div class="demo-btn-solid">Book a consultation →</div>
+              <div class="demo-btn-text">View portfolio →</div>
+            </div>
+          </div>
+          <div class="demo-cards">
+            <div class="demo-card">
+              <div class="num">01</div><div class="lbl">Accent</div>
+              <div class="price">35,000</div>
+              <div class="feat">Up to 3 panels</div>
+              <div class="go">Get a quote</div>
+            </div>
+            <div class="demo-card emph">
+              <div class="num">02 <span class="chip">Popular</span></div><div class="lbl">Full Wrap</div>
+              <div class="price">80,000</div>
+              <div class="feat">Full exterior</div>
+              <div class="go">Get a quote</div>
+            </div>
+            <div class="demo-card">
+              <div class="num">03</div><div class="lbl">Protection</div>
+              <div class="price">150,000</div>
+              <div class="feat">Full or zone PPF</div>
+              <div class="go">Get a quote</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <p class="eyebrow">Token reference</p>
+    <h2>Every value, named the same in both themes.</h2>
+
+    <div class="group">
+      <div class="group-title">Base &amp; surface</div>
+      <table>
+        <tr><th>Token</th><th>Light</th><th>Dark</th></tr>
+        <tr><td><div class="tok-name">--white</div><div class="tok-use">Page background</div></td>
+          <td class="swatch-cell"><span class="chip" style="background:#ffffff"></span><span class="hex">#ffffff</span></td>
+          <td class="swatch-cell"><span class="chip" style="background:#0a0a0a"></span><span class="hex">#0a0a0a</span></td></tr>
+        <tr><td><div class="tok-name">--tint</div><div class="tok-use">Row / panel hover tint</div></td>
+          <td class="swatch-cell"><span class="chip" style="background:#fafafa"></span><span class="hex">#fafafa</span></td>
+          <td class="swatch-cell"><span class="chip" style="background:#141414"></span><span class="hex">#141414</span></td></tr>
+        <tr><td><div class="tok-name">--field</div><div class="tok-use">Input / textarea fill</div></td>
+          <td class="swatch-cell"><span class="chip" style="background:#f4f4f4"></span><span class="hex">#f4f4f4</span></td>
+          <td class="swatch-cell"><span class="chip" style="background:#1a1a1a"></span><span class="hex">#1a1a1a</span></td></tr>
+        <tr><td><div class="tok-name">--field-hover</div><div class="tok-use">Input hover fill</div></td>
+          <td class="swatch-cell"><span class="chip" style="background:#efefef"></span><span class="hex">#efefef</span></td>
+          <td class="swatch-cell"><span class="chip" style="background:#202020"></span><span class="hex">#202020</span></td></tr>
+        <tr><td><div class="tok-name">--surface</div><div class="tok-use">Portfolio caption bed, frame backing</div></td>
+          <td class="swatch-cell"><span class="chip" style="background:#ececec"></span><span class="hex">#ececec</span></td>
+          <td class="swatch-cell"><span class="chip" style="background:#1c1c1c"></span><span class="hex">#1c1c1c</span></td></tr>
+        <tr><td><div class="tok-name">--frame</div><div class="tok-use">Image-placeholder fill</div></td>
+          <td class="swatch-cell"><span class="chip" style="background:#d9d9d9"></span><span class="hex">#d9d9d9</span></td>
+          <td class="swatch-cell"><span class="chip" style="background:#242424"></span><span class="hex">#242424</span></td></tr>
+      </table>
+    </div>
+
+    <div class="group">
+      <div class="group-title">Rules &amp; strokes</div>
+      <table>
+        <tr><td><div class="tok-name">--rule</div><div class="tok-use">All 1px dividers, card borders</div></td>
+          <td class="swatch-cell"><span class="chip" style="background:#e6e6e6"></span><span class="hex">#e6e6e6</span></td>
+          <td class="swatch-cell"><span class="chip" style="background:#262626"></span><span class="hex">#262626</span></td></tr>
+        <tr><td><div class="tok-name">--rule-strong</div><div class="tok-use">Filter-pill border, quote accent bar</div></td>
+          <td class="swatch-cell"><span class="chip" style="background:#e0e0e0"></span><span class="hex">#e0e0e0</span></td>
+          <td class="swatch-cell"><span class="chip" style="background:#2c2c2c"></span><span class="hex">#2c2c2c</span></td></tr>
+        <tr><td><div class="tok-name">--rule-hover</div><div class="tok-use">Pricing card border on hover</div></td>
+          <td class="swatch-cell"><span class="chip" style="background:#d8d8d8"></span><span class="hex">#d8d8d8</span></td>
+          <td class="swatch-cell"><span class="chip" style="background:#333333"></span><span class="hex">#333333</span></td></tr>
+      </table>
+    </div>
+
+    <div class="group">
+      <div class="group-title">Text</div>
+      <table>
+        <tr><td><div class="tok-name">--ink</div><div class="tok-use">Primary text, headings, nav links</div></td>
+          <td class="swatch-cell"><span class="chip" style="background:#111111"></span><span class="hex">#111111</span></td>
+          <td class="swatch-cell"><span class="chip" style="background:#f5f5f5"></span><span class="hex">#f5f5f5</span></td></tr>
+        <tr><td><div class="tok-name">--body</div><div class="tok-use">Paragraphs</div></td>
+          <td class="swatch-cell"><span class="chip" style="background:#6f6f6f"></span><span class="hex">#6f6f6f</span></td>
+          <td class="swatch-cell"><span class="chip" style="background:#a8a8a8"></span><span class="hex">#a8a8a8</span></td></tr>
+        <tr><td><div class="tok-name">--muted</div><div class="tok-use">Eyebrow labels, card subtitles</div></td>
+          <td class="swatch-cell"><span class="chip" style="background:#8a8a8a"></span><span class="hex">#8a8a8a</span></td>
+          <td class="swatch-cell"><span class="chip" style="background:#8c8c8c"></span><span class="hex">#8c8c8c</span></td></tr>
+        <tr><td><div class="tok-name">--muted-dark</div><div class="tok-use">Contact row labels</div></td>
+          <td class="swatch-cell"><span class="chip" style="background:#9a9a9a"></span><span class="hex">#9a9a9a</span></td>
+          <td class="swatch-cell"><span class="chip" style="background:#7c7c7c"></span><span class="hex">#7c7c7c</span></td></tr>
+        <tr><td><div class="tok-name">--numeral</div><div class="tok-use">Services / process numerals</div></td>
+          <td class="swatch-cell"><span class="chip" style="background:#a8a8a8"></span><span class="hex">#a8a8a8</span></td>
+          <td class="swatch-cell"><span class="chip" style="background:#5e5e5e"></span><span class="hex">#5e5e5e</span></td></tr>
+        <tr><td><div class="tok-name">--placeholder</div><div class="tok-use">Input placeholder text</div></td>
+          <td class="swatch-cell"><span class="chip" style="background:#a3a3a3"></span><span class="hex">#a3a3a3</span></td>
+          <td class="swatch-cell"><span class="chip" style="background:#6b6b6b"></span><span class="hex">#6b6b6b</span></td></tr>
+        <tr><td><div class="tok-name">--hero-ghost</div><div class="tok-use">Hero headline, second line</div></td>
+          <td class="swatch-cell"><span class="chip" style="background:#bcbcbc"></span><span class="hex">#bcbcbc</span></td>
+          <td class="swatch-cell"><span class="chip" style="background:#444444"></span><span class="hex">#444444</span></td></tr>
+        <tr><td><div class="tok-name">--rail-idle</div><div class="tok-use">Section-rail inactive numeral</div></td>
+          <td class="swatch-cell"><span class="chip" style="background:#c8c8c8"></span><span class="hex">#c8c8c8</span></td>
+          <td class="swatch-cell"><span class="chip" style="background:#3a3a3a"></span><span class="hex">#3a3a3a</span></td></tr>
+        <tr><td><div class="tok-name">--price-numeral</div><div class="tok-use">Pricing numerals, light cards</div></td>
+          <td class="swatch-cell"><span class="chip" style="background:#c0c0c0"></span><span class="hex">#c0c0c0</span></td>
+          <td class="swatch-cell"><span class="chip" style="background:#333333"></span><span class="hex">#333333</span></td></tr>
+      </table>
+    </div>
+
+    <div class="group">
+      <div class="group-title">Buttons &amp; emphasis surfaces — polarity flips</div>
+      <table>
+        <tr><td><div class="tok-name">--ink-btn</div><div class="tok-use">Button fill, active pill, emphasis card bg</div></td>
+          <td class="swatch-cell"><span class="chip" style="background:#0a0a0a"></span><span class="hex">#0a0a0a</span></td>
+          <td class="swatch-cell"><span class="chip" style="background:#f5f5f5"></span><span class="hex">#f5f5f5</span></td></tr>
+        <tr><td><div class="tok-name">--ink-btn-hover</div><div class="tok-use">Button hover fill</div></td>
+          <td class="swatch-cell"><span class="chip" style="background:#242424"></span><span class="hex">#242424</span></td>
+          <td class="swatch-cell"><span class="chip" style="background:#dcdcdc"></span><span class="hex">#dcdcdc</span></td></tr>
+        <tr><td><div class="tok-name">--ink-chip</div><div class="tok-use">"Most popular" chip on emphasis card</div></td>
+          <td class="swatch-cell"><span class="chip" style="background:#2a2a2a"></span><span class="hex">#2a2a2a</span></td>
+          <td class="swatch-cell"><span class="chip" style="background:#e2e2e2"></span><span class="hex">#e2e2e2</span></td></tr>
+        <tr><td><div class="tok-name">on-emphasis-primary</div><div class="tok-use">Price text on the emphasis card</div></td>
+          <td class="swatch-cell"><span class="chip" style="background:#ffffff;border-color:#ccc"></span><span class="hex">#ffffff</span></td>
+          <td class="swatch-cell"><span class="chip" style="background:#0a0a0a"></span><span class="hex">#0a0a0a</span></td></tr>
+        <tr><td><div class="tok-name">on-emphasis-secondary</div><div class="tok-use">Description / features on the emphasis card</div></td>
+          <td class="swatch-cell"><span class="chip" style="background:#9a9a9a"></span><span class="hex">#9a9a9a</span></td>
+          <td class="swatch-cell"><span class="chip" style="background:#4a4a4a"></span><span class="hex">#4a4a4a</span></td></tr>
+      </table>
+    </div>
+
+    <div class="group">
+      <div class="group-title">Feedback &amp; accent</div>
+      <table>
+        <tr><td><div class="tok-name">--error</div><div class="tok-use">Invalid field border, error text</div></td>
+          <td class="swatch-cell"><span class="chip" style="background:#c0392b"></span><span class="hex">#c0392b</span></td>
+          <td class="swatch-cell"><span class="chip" style="background:#e0574a"></span><span class="hex">#e0574a</span></td></tr>
+        <tr><td><div class="tok-name">--error-bg</div><div class="tok-use">Invalid field fill</div></td>
+          <td class="swatch-cell"><span class="chip" style="background:#fdf5f4;border-color:#ccc"></span><span class="hex">#fdf5f4</span></td>
+          <td class="swatch-cell"><span class="chip" style="background:#2a1512"></span><span class="hex">#2a1512</span></td></tr>
+        <tr><td><div class="tok-name">--accent</div><div class="tok-use">"WRAP" &amp; "DRIVE" wordmark only — fixed</div></td>
+          <td class="swatch-cell"><span class="chip" style="background:#e8261c"></span><span class="hex">#e8261c</span></td>
+          <td class="swatch-cell"><span class="chip" style="background:#e8261c"></span><span class="hex">#e8261c</span></td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section class="block" style="margin-top:56px;padding-top:28px;border-top:1px solid var(--page-rule)">
+    <p class="eyebrow">Next, pending your sign-off</p>
+    <p class="intro" style="margin-top:10px">
+      Toggle in the nav (sun/moon icon, next to the CTA) → persisted to <span class="tok-name">localStorage</span>
+      → falls back to <span class="tok-name">prefers-color-scheme</span> when no manual choice exists yet, applied
+      as a <span class="tok-name">data-theme</span> attribute on <span class="tok-name">&lt;html&gt;</span> exactly
+      as sketched at the top of this file, so there's no flash of the wrong theme on load.
+    </p>
+  </section>
+</div>
