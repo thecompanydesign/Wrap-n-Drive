@@ -11,7 +11,7 @@ export function Hero() {
   useHeroParallax(frameRef, fillRef);
 
   return (
-    <Section id="top" noTopRule skipReveal topPadding="clamp(72px, 10.4vw, 150px)">
+    <Section id="top" skipReveal topPadding="clamp(72px, 10.4vw, 150px)">
       <h1 className="h1">
         <span style={{ display: 'block', overflow: 'hidden' }}>
           <span style={{ display: 'block', animation: 'wndRise 1.25s var(--ease-expo) 0.16s both' }}>

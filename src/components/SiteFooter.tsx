@@ -53,7 +53,6 @@ export function SiteFooter() {
       <div className="wnd-container">
         <div
           style={{
-            borderTop: '1px solid var(--rule)',
             paddingTop: 'clamp(48px, 4.6vw, 66px)',
           }}
         >
