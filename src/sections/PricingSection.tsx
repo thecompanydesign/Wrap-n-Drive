@@ -68,10 +68,18 @@ function PriceCard({ tier, delay }: { tier: PriceTier; delay: number }) {
 export function PricingSection() {
   return (
     <Section id="pricing">
-      <div>
+      <div
+        style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          justifyContent: 'space-between',
+          alignItems: 'flex-end',
+          gap: '20px 24px',
+        }}
+      >
         <SectionHeader eyebrow="PRICING" heading="Transparent pricing." />
-        <Reveal delay={140} style={{ marginTop: '16px' }}>
-          <p className="body-p" style={{ maxWidth: 'min(100%, 42ch)' }}>
+        <Reveal delay={140} style={{ marginTop: '6px' }}>
+          <p className="body-p" style={{ maxWidth: 'min(100%, 42ch)', textAlign: 'right' }}>
             Every quote is fixed before we start. No surprises at collection.
           </p>
         </Reveal>
