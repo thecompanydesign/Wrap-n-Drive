@@ -1,0 +1,162 @@
+/* ============================================================
+   TYPOGRAPHY ROLES — BUILD-SPEC.md §2.2
+   ============================================================ */
+
+.logo {
+  font-size: clamp(20px, 1.88vw, 27px);
+  font-weight: 800;
+  font-style: italic;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.nav-link {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1;
+  color: var(--ink);
+}
+
+.h1 {
+  font-size: clamp(44px, 8.2vw, 118px);
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: -0.045em;
+  color: var(--ink);
+}
+
+.h1-ghost {
+  color: var(--hero-ghost);
+}
+
+.h2 {
+  font-size: clamp(30px, 3.06vw, 44px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+
+.h2--multiline {
+  line-height: 1.13;
+  letter-spacing: -0.025em;
+}
+
+.eyebrow {
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.hero-p {
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.65;
+  color: var(--body);
+}
+
+.body-p {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--body);
+}
+
+.body-p--tight {
+  line-height: 1.65;
+}
+
+.body-p--muted {
+  color: var(--muted);
+}
+
+.pull-quote {
+  font-size: clamp(24px, 2.5vw, 36px);
+  font-weight: 400;
+  line-height: 1.32;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.stat-number {
+  font-size: clamp(24px, 1.95vw, 28px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.stat-label {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+  color: var(--muted);
+}
+
+.price {
+  font-size: clamp(26px, 2.1vw, 30px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+}
+
+.price--onDark {
+  color: var(--white);
+}
+
+.row-title {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--ink);
+}
+
+.row-title--light {
+  font-weight: 500;
+}
+
+.numeral-text {
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  color: var(--numeral);
+}
+
+.numeral-text--light {
+  color: var(--price-numeral);
+}
+
+.small-print {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.footer-link {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+  color: #3d3d3d;
+}
+
+.placeholder-caption {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--body);
+}
+
+@media (min-width: 834px) {
+  .placeholder-caption {
+    font-size: 13px;
+  }
+}
