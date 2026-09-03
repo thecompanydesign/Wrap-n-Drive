@@ -130,7 +130,12 @@ export function ContactSection() {
             </Reveal>
             <Reveal delay={120} className="contact-detail-row">
               <span className="contact-detail-row__label">Location</span>
-              <span className="contact-detail-row__value">{siteConfig.contact.location}</span>
+              <span className="contact-detail-row__value">
+                <span className="location-full">{siteConfig.contact.location}</span>
+                <span className="location-short">
+                  {siteConfig.contact.location.replace(' Supermarket', '')}
+                </span>
+              </span>
             </Reveal>
           </div>
         </div>

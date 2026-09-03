@@ -482,6 +482,16 @@
   border-bottom: 1px solid var(--rule);
 }
 
+/* IMPLEMENTATION OVERRIDE: FAQ rows lose their dividers at the user's request;
+   Services keeps them (same AccordionRow component, scoped by this class). */
+.faq-list .accordion-row {
+  border-top: none;
+}
+
+.faq-list .accordion-row--last {
+  border-bottom: none;
+}
+
 .accordion-row:hover,
 .accordion-row:focus-visible {
   padding-left: 12px;
@@ -758,6 +768,23 @@
 .contact-detail-row__value {
   font-size: 15px;
   font-weight: 600;
+}
+
+/* IMPLEMENTATION OVERRIDE: drop "Supermarket" from the location on mobile —
+   full text still ships for tablet/desktop and for screen readers via the
+   hidden span (both stay in the DOM, only one is visible at a time). */
+.location-short {
+  display: none;
+}
+
+@media (max-width: 759px) {
+  .location-full {
+    display: none;
+  }
+
+  .location-short {
+    display: inline;
+  }
 }
 
 .contact-link {

@@ -14,7 +14,7 @@ export function FaqSection() {
       <TwoColumn
         label={<SectionHeader eyebrow="FAQ" heading="Common questions." measureCh={10} balance />}
       >
-        <div>
+        <div className="faq-list">
           {faqs.map((f, i) => (
             <Reveal key={f.question} delay={i * 60}>
               <AccordionRow
