@@ -333,24 +333,22 @@
 }
 
 .btn-text {
-  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 6px;
   color: var(--ink);
   font-size: 14px;
-  border-bottom: 1px solid transparent;
-  transition: border-color 0.45s ease;
-  padding-bottom: 1px;
+  transition: color 0.4s ease;
 }
 
 .btn-text:hover {
-  border-bottom-color: var(--ink);
+  color: var(--muted);
 }
 
 .btn-text:focus-visible {
   outline: none;
-  border-bottom-color: var(--ink);
+  box-shadow: 0 0 0 3px rgba(10, 10, 10, 0.18);
+  border-radius: 4px;
 }
 
 /* ============================================================
@@ -758,14 +756,17 @@
 }
 
 .contact-link {
-  border-bottom: 1px solid transparent;
-  transition: border-color 0.45s ease;
+  transition: color 0.4s ease;
 }
 
-.contact-link:hover,
+.contact-link:hover {
+  color: var(--muted);
+}
+
 .contact-link:focus-visible {
-  border-bottom-color: var(--ink);
   outline: none;
+  box-shadow: 0 0 0 3px rgba(10, 10, 10, 0.18);
+  border-radius: 4px;
 }
 
 /* ============================================================
