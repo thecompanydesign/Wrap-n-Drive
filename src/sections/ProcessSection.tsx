@@ -19,11 +19,10 @@ export function ProcessSection() {
         >
           {steps.map((s, i) => (
             <Reveal key={s.number} delay={i * 80}>
-              <div
-                className={`process-step ${
-                  i < 4 ? 'process-step--bottom-border' : 'process-step--top-border'
-                }`}
-              >
+              {/* Bottom-border only, on the first two rows (i<4) — a mixed
+                  bottom+top scheme doubled the rule at the row2/row3 seam
+                  since both edges met at the same boundary. */}
+              <div className={`process-step ${i < 4 ? 'process-step--bottom-border' : ''}`}>
                 <p className="numeral-text">{s.number}</p>
                 <p className="row-title" style={{ marginTop: '16px' }}>
                   {s.title}

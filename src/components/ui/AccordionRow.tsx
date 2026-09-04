@@ -45,14 +45,17 @@ export function AccordionRow({
   };
 
   return (
-    <div>
+    // The bottom rule lives on this wrapper (not the row) so it stays below
+    // the whole row+panel unit — including the revealed answer — instead of
+    // sitting between the row header and an expanded panel.
+    <div className={isLast ? 'accordion-item--last' : ''}>
       <div
         role="button"
         tabIndex={0}
         id={id}
         aria-expanded={open}
         aria-controls={panelId}
-        className={`accordion-row ${isLast ? 'accordion-row--last' : ''}`}
+        className="accordion-row"
         onClick={onToggle}
         onKeyDown={handleKeyDown}
       >

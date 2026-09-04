@@ -528,18 +528,9 @@
   outline: none;
 }
 
-.accordion-row--last {
+/* On the wrapper (row+panel), not the row — see AccordionRow.tsx comment. */
+.accordion-item--last {
   border-bottom: 1px solid var(--rule);
-}
-
-/* IMPLEMENTATION OVERRIDE: FAQ rows lose their dividers at the user's request;
-   Services keeps them (same AccordionRow component, scoped by this class). */
-.faq-list .accordion-row {
-  border-top: none;
-}
-
-.faq-list .accordion-row--last {
-  border-bottom: none;
 }
 
 .accordion-row:hover,
@@ -648,11 +639,6 @@
 
 .process-step--bottom-border {
   border-bottom: 1px solid var(--rule);
-}
-
-.process-step--top-border {
-  border-top: 1px solid var(--rule);
-  padding: 36px 0 0;
 }
 
 /* ============================================================

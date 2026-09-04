@@ -79,7 +79,10 @@ export function PricingSection() {
       >
         <SectionHeader eyebrow="PRICING" heading="Transparent pricing." />
         <Reveal delay={140} style={{ marginTop: '6px' }}>
-          <p className="body-p" style={{ maxWidth: 'min(100%, 42ch)', textAlign: 'right' }}>
+          <p
+            className="body-p"
+            style={{ maxWidth: 'min(100%, 42ch)', textAlign: 'right', marginLeft: 'auto' }}
+          >
             Every quote is fixed before we start. No surprises at collection.
           </p>
         </Reveal>
