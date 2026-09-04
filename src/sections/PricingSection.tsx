@@ -69,20 +69,17 @@ export function PricingSection() {
   return (
     <Section id="pricing">
       <div
+        className="pricing-header-row"
         style={{
           display: 'flex',
           flexWrap: 'wrap',
           justifyContent: 'space-between',
-          alignItems: 'flex-end',
           gap: '20px 24px',
         }}
       >
         <SectionHeader eyebrow="PRICING" heading="Transparent pricing." />
-        <Reveal delay={140} style={{ marginTop: '6px' }}>
-          <p
-            className="body-p"
-            style={{ maxWidth: 'min(100%, 42ch)', textAlign: 'right', marginLeft: 'auto' }}
-          >
+        <Reveal delay={140} className="pricing-subtitle-wrap" style={{ marginTop: '6px' }}>
+          <p className="body-p pricing-subtitle" style={{ maxWidth: 'min(100%, 42ch)' }}>
             Every quote is fixed before we start. No surprises at collection.
           </p>
         </Reveal>

@@ -718,6 +718,35 @@
   border-radius: 999px;
 }
 
+/* Pricing subtitle: right-aligned beside the heading on desktop, stacked
+   left-aligned directly under it on mobile/tablet — matches the ≥1200px
+   "desktop" threshold the section rail already uses. */
+.pricing-header-row {
+  align-items: flex-end;
+}
+
+.pricing-subtitle {
+  text-align: right;
+  margin-left: auto;
+}
+
+@media (max-width: 1199px) {
+  .pricing-header-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .pricing-subtitle-wrap {
+    margin-top: 0 !important;
+  }
+
+  .pricing-subtitle {
+    text-align: left;
+    margin-left: 0;
+    max-width: 100%;
+  }
+}
+
 .price-feature {
   display: flex;
   align-items: baseline;
