@@ -4,6 +4,7 @@ import { SectionHeader } from '../components/ui/SectionHeader';
 import { Pill } from '../components/ui/Pill';
 import { ImageFrame } from '../components/ui/ImageFrame';
 import { Reveal } from '../components/ui/Reveal';
+import { useCardTilt } from '../hooks/useCardTilt';
 import { projects, filterOptions } from '../data/content';
 import type { Project } from '../data/types';
 
@@ -32,13 +33,16 @@ function ProjectCard({
     return () => window.clearTimeout(timeoutRef.current);
   }, [active]);
 
+  const { cardRef, imageRef } = useCardTilt<HTMLDivElement, HTMLDivElement>();
+
   if (!mounted) return null;
 
   const aspect = project.image.aspect.replace('/', ' / ');
 
   return (
-    <Reveal delay={delay} style={{ height: '100%' }}>
+    <Reveal delay={delay} variant="scale" style={{ height: '100%' }}>
       <div
+        ref={cardRef}
         className="portfolio-card"
         style={{
           height: '100%',
@@ -53,6 +57,7 @@ function ProjectCard({
           <ImageFrame
             aspect={aspect}
             caption={`${project.title.toUpperCase()} — ${project.subtitle.toUpperCase()}`}
+            fillRef={imageRef}
           />
         </div>
         <div

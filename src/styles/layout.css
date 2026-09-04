@@ -34,6 +34,30 @@
 }
 
 /* ============================================================
+   SCROLL PROGRESS
+   ============================================================ */
+
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  z-index: calc(var(--z-header) + 1);
+  pointer-events: none;
+  background: transparent;
+}
+
+.scroll-progress__bar {
+  height: 100%;
+  width: 100%;
+  background: var(--ink);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.1s linear;
+}
+
+/* ============================================================
    HEADER / NAV
    ============================================================ */
 
@@ -43,8 +67,10 @@
   z-index: var(--z-header);
   min-height: clamp(60px, 5.6vw, 80px);
   background: var(--white);
+  backdrop-filter: saturate(100%) blur(0);
+  -webkit-backdrop-filter: saturate(100%) blur(0);
   border-bottom: 1px solid var(--rule);
-  transition: background 0.5s ease, box-shadow 0.4s ease;
+  transition: background 0.5s ease, box-shadow 0.5s ease, backdrop-filter 0.5s ease;
 }
 
 .site-header--scrolled {
@@ -81,12 +107,13 @@
 .nav-link {
   display: inline-block;
   padding: 6px 0;
-  transition: color 0.4s ease;
+  transition: color 0.4s ease, transform 0.35s var(--ease-expo);
   box-shadow: 0 0 0 0 transparent;
 }
 
 .nav-link:hover {
   color: var(--muted);
+  transform: translateY(-1px);
 }
 
 .nav-link:focus-visible {
@@ -229,6 +256,12 @@
   }
 }
 
+/* Wraps a CTA that should pull slightly toward the cursor (useMagnetic) — the
+   hook owns the transform, this just keeps the wrapper from disturbing flow. */
+.magnetic-wrap {
+  display: inline-flex;
+}
+
 /* ============================================================
    BUTTONS
    ============================================================ */
@@ -266,7 +299,7 @@
 }
 
 .btn-solid:active {
-  transform: translateY(0);
+  transform: translateY(0) scale(0.97);
   box-shadow: none;
 }
 
@@ -297,6 +330,10 @@
   transform: translateY(-2px);
 }
 
+.btn-onDark:active {
+  transform: translateY(0) scale(0.97);
+}
+
 .btn-onDark:focus-visible {
   box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.35);
 }
@@ -313,6 +350,10 @@
   transform: translateY(-2px);
 }
 
+.btn-light:active {
+  transform: translateY(0) scale(0.97);
+}
+
 .btn-form {
   background: var(--ink-btn);
   color: var(--white);
@@ -325,6 +366,11 @@
   background: var(--ink-btn-hover);
   transform: translateY(-1px);
   box-shadow: 0 14px 30px rgba(0, 0, 0, 0.2);
+}
+
+.btn-form:active:not(:disabled) {
+  transform: translateY(0) scale(0.97);
+  box-shadow: none;
 }
 
 .btn-text {
@@ -359,7 +405,11 @@
   white-space: nowrap;
   cursor: pointer;
   transition: background-color 0.45s ease, color 0.45s ease,
-    border-color 0.45s ease;
+    border-color 0.45s ease, transform 0.3s var(--ease-expo);
+}
+
+.pill:active {
+  transform: scale(0.95);
 }
 
 .pill--idle {

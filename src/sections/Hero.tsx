@@ -4,11 +4,13 @@ import { Button } from '../components/ui/Button';
 import { ImageFrame } from '../components/ui/ImageFrame';
 import { StatsBar } from './StatsBar';
 import { useHeroParallax } from '../hooks/useHeroParallax';
+import { useMagnetic } from '../hooks/useMagnetic';
 
 export function Hero() {
   const frameRef = useRef<HTMLDivElement>(null);
   const fillRef = useRef<HTMLDivElement>(null);
   useHeroParallax(frameRef, fillRef);
+  const ctaRef = useMagnetic<HTMLSpanElement>();
 
   return (
     <Section id="top" skipReveal topPadding="clamp(72px, 10.4vw, 150px)">
@@ -44,9 +46,11 @@ export function Hero() {
             certified technicians with an obsession for detail.
           </p>
           <div style={{ display: 'flex', gap: '24px', alignItems: 'center', flexWrap: 'wrap' }}>
-            <Button href="#contact" variant="solid">
-              Book a consultation &nbsp;→
-            </Button>
+            <span ref={ctaRef} className="magnetic-wrap">
+              <Button href="#contact" variant="solid">
+                Book a consultation &nbsp;→
+              </Button>
+            </span>
             <Button href="#portfolio" variant="text">
               View portfolio →
             </Button>

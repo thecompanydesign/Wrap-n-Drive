@@ -9,7 +9,7 @@ function PriceCard({ tier, delay }: { tier: PriceTier; delay: number }) {
   const emphasis = Boolean(tier.emphasis);
 
   return (
-    <Reveal delay={delay} style={{ height: '100%' }}>
+    <Reveal delay={delay} variant="scale" style={{ height: '100%' }}>
       <div className={`price-card ${emphasis ? 'price-card--emphasis' : ''}`}>
         <div
           style={{

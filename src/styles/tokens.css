@@ -39,8 +39,16 @@
   --font-sans: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   --font-mono: ui-monospace, 'SF Mono', Menlo, monospace;
 
-  /* Easing */
+  /* Easing — the one curve used for every settle/reveal motion in the site,
+     kept singular on purpose so the whole page reads as one motion system.
+     Hover/press micro-interactions use plain `ease`, same as before. */
   --ease-expo: cubic-bezier(.16, 1, .3, 1);
+
+  /* Reveal motion constants — shared by useReveal's rise/scale/mask variants
+     and the load-time wndRise keyframe below. */
+  --reveal-distance: 22px;
+  --reveal-blur: 7px;
+  --reveal-duration: 1.15s;
 
   /* Geometry */
   --page-max: 1440px;
@@ -131,11 +139,13 @@ ol {
 @keyframes wndRise {
   from {
     opacity: 0;
-    transform: translateY(18px);
+    transform: translateY(var(--reveal-distance)) scale(0.98);
+    filter: blur(var(--reveal-blur));
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
+    filter: blur(0);
   }
 }
 

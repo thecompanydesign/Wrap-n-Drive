@@ -13,11 +13,8 @@ export function TestimonialsSection() {
         <Eyebrow>WHAT CLIENTS SAY</Eyebrow>
       </Reveal>
 
-      <Reveal delay={70}>
-        <p
-          className="pull-quote"
-          style={{ maxWidth: 'min(100%, 56ch)', marginTop: 'clamp(28px, 3vw, 44px)' }}
-        >
+      <Reveal delay={70} variant="mask" style={{ marginTop: 'clamp(28px, 3vw, 44px)' }}>
+        <p className="pull-quote" style={{ maxWidth: 'min(100%, 56ch)' }}>
           &ldquo;{featured.quote}&rdquo;
         </p>
       </Reveal>
@@ -43,6 +40,7 @@ export function TestimonialsSection() {
           <Reveal
             key={t.name}
             delay={i * 90}
+            variant="scale"
             className={`quote-cell ${i === 1 ? 'quote-cell--divided' : ''}`}
           >
             <p className="body-p" style={{ fontSize: '15px', lineHeight: 1.6 }}>

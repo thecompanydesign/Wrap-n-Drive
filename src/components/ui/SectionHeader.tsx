@@ -25,7 +25,7 @@ export function SectionHeader({
       <Reveal delay={0}>
         <Eyebrow>{eyebrow}</Eyebrow>
       </Reveal>
-      <Reveal delay={70} style={{ marginTop: headingGap }}>
+      <Reveal delay={70} variant="mask" style={{ marginTop: headingGap }}>
         <Heading2 measureCh={measureCh} balance={balance} multiline={multiline}>
           {heading}
         </Heading2>

@@ -99,7 +99,7 @@ export function ContactSection() {
             <Reveal delay={0}>
               <Eyebrow>CONTACT</Eyebrow>
             </Reveal>
-            <Reveal delay={70} style={{ marginTop: '22px' }}>
+            <Reveal delay={70} variant="mask" style={{ marginTop: '22px' }}>
               <Heading2 measureCh={20} balance>
                 Let&rsquo;s talk about your vehicle.
               </Heading2>

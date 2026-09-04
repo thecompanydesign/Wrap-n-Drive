@@ -2,6 +2,7 @@ import { RafLoopProvider } from './hooks/useRafLoop';
 import { useAnchorScroll } from './hooks/useAnchorScroll';
 import { LoadVeil } from './components/LoadVeil';
 import { SectionRail } from './components/SectionRail';
+import { ScrollProgress } from './components/ScrollProgress';
 import { SiteHeader } from './components/SiteHeader';
 import { SiteFooter } from './components/SiteFooter';
 import { Hero } from './sections/Hero';
@@ -18,6 +19,7 @@ function Page() {
 
   return (
     <>
+      <ScrollProgress />
       <SiteHeader />
       <main>
         <Hero />

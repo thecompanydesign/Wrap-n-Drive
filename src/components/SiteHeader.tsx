@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useRafLoop } from '../hooks/useRafLoop';
+import { useMagnetic } from '../hooks/useMagnetic';
 import { navItems } from '../data/content';
 import { Button } from './ui/Button';
 import { MenuIcon } from './ui/MenuIcon';
@@ -16,6 +17,7 @@ export function SiteHeader() {
   const lastRef = useRef(false);
   const headerRef = useRef<HTMLElement>(null);
   const menuBtnRef = useRef<HTMLButtonElement>(null);
+  const ctaRef = useMagnetic<HTMLDivElement>(0.25, 6);
 
   useRafLoop(() => {
     const isScrolled = window.scrollY > 16;
@@ -73,7 +75,7 @@ export function SiteHeader() {
               </a>
             ))}
           </nav>
-          <div className="site-header__cta">
+          <div ref={ctaRef} className="site-header__cta">
             <Button href="#contact" variant="solid-small">
               Get in touch
             </Button>
