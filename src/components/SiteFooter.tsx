@@ -54,6 +54,7 @@ export function SiteFooter() {
         <div
           style={{
             paddingTop: 'clamp(48px, 4.6vw, 66px)',
+            paddingBottom: 'clamp(40px, 5vw, 64px)',
           }}
         >
           <div className="wnd-content">

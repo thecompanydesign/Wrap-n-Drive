@@ -38,7 +38,7 @@ export function ServicesSection() {
                 title={s.title}
                 open={openId === s.number}
                 onToggle={() => setOpenId((cur) => (cur === s.number ? null : s.number))}
-                isLast={i === services.length - 1}
+                isFirst={i === 0}
               >
                 {s.body}
               </AccordionRow>

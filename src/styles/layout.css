@@ -533,6 +533,10 @@
   border-bottom: 1px solid var(--rule);
 }
 
+.accordion-row--first {
+  border-top: none;
+}
+
 .accordion-row:hover,
 .accordion-row:focus-visible {
   padding-left: 12px;

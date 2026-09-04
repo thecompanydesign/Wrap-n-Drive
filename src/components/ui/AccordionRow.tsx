@@ -8,6 +8,7 @@ type AccordionRowProps = {
   titleWeight?: 'default' | 'light';
   open: boolean;
   onToggle: () => void;
+  isFirst?: boolean;
   isLast?: boolean;
   faqIndent?: boolean;
   children: ReactNode;
@@ -20,6 +21,7 @@ export function AccordionRow({
   titleWeight = 'default',
   open,
   onToggle,
+  isFirst,
   isLast,
   faqIndent,
   children,
@@ -55,7 +57,7 @@ export function AccordionRow({
         id={id}
         aria-expanded={open}
         aria-controls={panelId}
-        className="accordion-row"
+        className={`accordion-row ${isFirst ? 'accordion-row--first' : ''}`}
         onClick={onToggle}
         onKeyDown={handleKeyDown}
       >
