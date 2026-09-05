@@ -46,7 +46,7 @@
 
   /* Reveal motion constants — shared by useReveal's rise/scale/mask variants
      and the load-time wndRise keyframe below. */
-  --reveal-distance: 22px;
+  --reveal-distance: 26px;
   --reveal-blur: 7px;
   --reveal-duration: 1.15s;
 

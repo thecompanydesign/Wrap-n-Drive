@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import { prefersReducedMotion } from './useReducedMotion';
 
-export type RevealVariant = 'rise' | 'scale' | 'mask';
+export type RevealVariant = 'rise' | 'scale' | 'mask' | 'container';
 
 // Matches .load-veil's animation: wndVeil 0.85s ease 0.45s both (tokens.css) —
 // delay + duration = 1.3s until the veil is fully transparent. Reveals wait
@@ -54,7 +54,11 @@ export function useReveal<T extends HTMLElement = HTMLDivElement>(
             }
           });
         },
-        { rootMargin: '0px 0px -80px 0px', threshold: 0 }
+        // Percentage-based bottom margin (vs. a fixed px offset) keeps the
+        // trigger point proportionally consistent across viewport heights —
+        // a short phone viewport and a tall desktop monitor both reveal
+        // content the same fraction of the way up the screen.
+        { rootMargin: '0px 0px -12% 0px', threshold: 0 }
       );
       observer.observe(el);
 
@@ -69,30 +73,42 @@ export function useReveal<T extends HTMLElement = HTMLDivElement>(
   }, []);
 
   const delay = `${delayMs * 0.75}ms`;
+  // `container` backs the one full-section wrapper every page section gets
+  // for free (Section.tsx) — often the tallest, largest-painted element on
+  // the page, and usually holding a bunch of individually-revealing children
+  // of its own. Transitioning `filter: blur()` across an area that large is
+  // real paint cost on low-end/mobile GPUs, and doubles up visually with
+  // whatever the nested items are already doing — so it skips blur and
+  // sticks to opacity+transform, the two properties a compositor can animate
+  // without a repaint.
+  const hasBlur = variant !== 'mask' && variant !== 'container';
   const transition =
     variant === 'mask'
       ? `transform var(--reveal-duration) var(--ease-expo), opacity .6s ease`
-      : `opacity var(--reveal-duration) var(--ease-expo), transform var(--reveal-duration) var(--ease-expo), filter var(--reveal-duration) var(--ease-expo)`;
+      : hasBlur
+        ? `opacity var(--reveal-duration) var(--ease-expo), transform var(--reveal-duration) var(--ease-expo), filter var(--reveal-duration) var(--ease-expo)`
+        : `opacity var(--reveal-duration) var(--ease-expo), transform var(--reveal-duration) var(--ease-expo)`;
 
   let hiddenTransform = 'translate3d(0,var(--reveal-distance),0)';
-  if (variant === 'scale') hiddenTransform = 'translate3d(0,10px,0) scale(0.96)';
+  if (variant === 'scale') hiddenTransform = 'translate3d(0,14px,0) scale(0.94)';
   if (variant === 'mask') hiddenTransform = 'translate3d(0,100%,0)';
+  if (variant === 'container') hiddenTransform = 'translate3d(0,calc(var(--reveal-distance) * 1.6),0)';
 
   const style: CSSProperties = revealed
     ? {
         opacity: 1,
         transform: variant === 'mask' ? 'translate3d(0,0,0)' : 'translate3d(0,0,0) scale(1)',
-        filter: variant === 'mask' ? undefined : 'blur(0)',
+        filter: hasBlur ? 'blur(0)' : undefined,
         transition,
         transitionDelay: delay,
       }
     : {
         opacity: variant === 'mask' ? 1 : 0,
         transform: hiddenTransform,
-        filter: variant === 'mask' ? undefined : `blur(var(--reveal-blur))`,
+        filter: hasBlur ? `blur(var(--reveal-blur))` : undefined,
         transition,
         transitionDelay: delay,
-        willChange: variant === 'mask' ? 'transform' : 'opacity, transform, filter',
+        willChange: variant === 'mask' ? 'transform' : hasBlur ? 'opacity, transform, filter' : 'opacity, transform',
         backfaceVisibility: 'hidden',
       };
 

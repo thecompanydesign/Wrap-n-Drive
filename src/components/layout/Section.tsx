@@ -18,7 +18,7 @@ type SectionProps = {
  * removed at the user's request (§1/§3 originally made it structural).
  */
 export function Section({ id, topPadding, skipReveal, className, children }: SectionProps) {
-  const { ref, style } = useReveal<HTMLDivElement>(0);
+  const { ref, style } = useReveal<HTMLDivElement>(0, 'container');
   return (
     <section id={id} className={className}>
       <div className="wnd-container">
