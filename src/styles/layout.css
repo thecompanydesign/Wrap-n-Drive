@@ -638,6 +638,11 @@
    ============================================================ */
 
 .process-step {
+  /* Fills its Reveal wrapper (already grid-stretched to the row height) so
+     the border-bottom sits at the row's shared edge, not wherever this
+     step's own — often shorter — body copy happens to end. */
+  height: 100%;
+  box-sizing: border-box;
   padding: 36px 0;
 }
 
