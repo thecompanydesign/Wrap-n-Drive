@@ -18,9 +18,23 @@ const VEIL_CLEAR_MS = 1300;
  * choreography, not in the underlying system.
  *
  * IMPLEMENTATION DECISION: IntersectionObserver stands in for the reference's
- * rAF sweep, as explicitly sanctioned by the spec. The 2.5s failsafe is kept
- * so content can never be stranded invisible; reduced motion renders visible
- * immediately with no observer at all.
+ * rAF sweep, as explicitly sanctioned by the spec. A failsafe timer is kept
+ * so content can never be stranded invisible if the observer somehow never
+ * fires; reduced motion renders visible immediately with no observer at all.
+ *
+ * BUG FOUND & FIXED: that failsafe used to fire a fixed 2.5s after mount,
+ * regardless of scroll position. Since every section mounts immediately on
+ * page load (not lazily as the user scrolls to it), this meant every section
+ * more than ~3.8s of scrolling below the fold silently finished its reveal
+ * off-screen well before anyone got there — confirmed directly: reloaded
+ * with zero scrolling, waited 5s, and found every section from Services
+ * through Contact already at opacity:1 despite bounding rects hundreds to
+ * thousands of pixels below the viewport. It looked "static" on arrival
+ * because the animation had already completed, invisibly, seconds earlier.
+ * Fix: push the failsafe far out so it's a true last resort for a section
+ * the observer genuinely never catches, not a default that pre-empts normal
+ * scroll speeds — the real IntersectionObserver path fires immediately the
+ * instant a section actually enters view and always wins this race first.
  */
 export function useReveal<T extends HTMLElement = HTMLDivElement>(
   delayMs = 0,
@@ -62,7 +76,7 @@ export function useReveal<T extends HTMLElement = HTMLDivElement>(
       );
       observer.observe(el);
 
-      failsafe = window.setTimeout(reveal, 2500);
+      failsafe = window.setTimeout(reveal, 15000);
     }, VEIL_CLEAR_MS);
 
     return () => {
