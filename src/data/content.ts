@@ -91,7 +91,11 @@ export const projects: Project[] = [
     title: 'Pink Colored PPF',
     subtitle: 'Audi Q5 S line',
     categories: ['full wrap', 'protection'],
-    image: { src: '', alt: 'Pink colored PPF wrap on an Audi Q5 S line', aspect: '805/469' },
+    image: {
+      src: '/images/work-audi-q5-pink-ppf.webp',
+      alt: 'Pink colored PPF wrap on an Audi Q5 S line',
+      aspect: '805/469',
+    },
     badge: 'Full Wrap',
     size: 'feature',
   },
@@ -100,7 +104,11 @@ export const projects: Project[] = [
     title: 'Red Custom Wrap',
     subtitle: 'Porsche 911 GT3',
     categories: ['full wrap', 'branding'],
-    image: { src: '', alt: 'Red custom wrap on a Porsche 911 GT3', aspect: '393/191' },
+    image: {
+      src: '/images/work-porsche-911-red.webp',
+      alt: 'Red custom wrap on a Porsche 911 GT3',
+      aspect: '393/191',
+    },
     size: 'stack',
   },
   {
@@ -108,7 +116,11 @@ export const projects: Project[] = [
     title: 'Custom Anime Wrap',
     subtitle: 'BMW Z4 Roadster',
     categories: ['full wrap'],
-    image: { src: '', alt: 'Custom anime wrap on a BMW Z4 Roadster', aspect: '393/191' },
+    image: {
+      src: '/images/work-bmw-z4-anime.webp',
+      alt: 'Custom anime wrap on a BMW Z4 Roadster',
+      aspect: '393/191',
+    },
     size: 'stack',
   },
   {
@@ -116,7 +128,11 @@ export const projects: Project[] = [
     title: 'Clear PPF',
     subtitle: 'Mercedes-Maybach S-Class',
     categories: ['protection'],
-    image: { src: '', alt: 'Clear PPF on a Mercedes-Maybach S-Class', aspect: '393/204' },
+    image: {
+      src: '/images/work-maybach-clear-ppf.webp',
+      alt: 'Clear PPF on a Mercedes-Maybach S-Class',
+      aspect: '393/204',
+    },
     size: 'grid',
   },
   {
@@ -124,7 +140,11 @@ export const projects: Project[] = [
     title: 'Custom Honey Wrap',
     subtitle: 'Peugeot 208',
     categories: ['full wrap'],
-    image: { src: '', alt: 'Custom honey wrap on a Peugeot 208', aspect: '393/204' },
+    image: {
+      src: '/images/work-peugeot-208-honey.webp',
+      alt: 'Custom honey wrap on a Peugeot 208',
+      aspect: '393/204',
+    },
     size: 'grid',
   },
   {
@@ -132,7 +152,11 @@ export const projects: Project[] = [
     title: 'Turquoise Gradient Wrap',
     subtitle: 'Mazda CX-5',
     categories: ['accent'],
-    image: { src: '', alt: 'Turquoise gradient wrap on a Mazda CX-5', aspect: '393/204' },
+    image: {
+      src: '/images/work-mazda-cx5-turquoise.webp',
+      alt: 'Turquoise gradient wrap on a Mazda CX-5',
+      aspect: '393/204',
+    },
     size: 'grid',
   },
 ];

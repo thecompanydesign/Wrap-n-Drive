@@ -63,6 +63,10 @@ export function Hero() {
           <ImageFrame
             aspect="1214 / 670"
             caption="HERO IMAGE — WRAPPED MERCEDES E-CLASS"
+            src="/images/hero-wrapped-e-class.webp"
+            alt="Wrapped Mercedes E-Class, front three-quarter view"
+            priority
+            objectPosition="center 55%"
             parallax
             className="hero-image-frame"
             frameRef={frameRef}

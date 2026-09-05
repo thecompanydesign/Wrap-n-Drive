@@ -465,6 +465,15 @@
   will-change: transform;
 }
 
+.image-frame__photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
 /* IMPLEMENTATION OVERRIDE: hero frame is more prominent on small screens —
    the original 1214/670 ratio reads as a thin strip on a narrow viewport,
    so it steps to a taller ratio below 600px. !important is required only

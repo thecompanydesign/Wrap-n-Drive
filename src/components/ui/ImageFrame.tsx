@@ -7,12 +7,19 @@ type ImageFrameProps = {
   className?: string;
   frameRef?: Ref<HTMLDivElement>;
   fillRef?: Ref<HTMLDivElement>;
+  /** Real photo — when omitted, the striped placeholder + caption ships instead. */
+  src?: string;
+  alt?: string;
+  /** Hero image only: eager + high fetch priority, since it's the LCP element. */
+  priority?: boolean;
+  objectPosition?: string;
 };
 
 /**
- * Placeholder image frame — BUILD-SPEC.md §6.
- * IMPLEMENTATION DECISION: real vehicle photography is not generated; the
- * striped placeholder fill + mono caption ships until the studio supplies assets.
+ * Image frame — BUILD-SPEC.md §6. Ships the striped placeholder + mono
+ * caption until a real photo is supplied via `src`; once supplied, the same
+ * frame (aspect-ratio, radius, overflow:hidden, parallax target) now shows
+ * the photo with object-fit:cover instead.
  */
 export function ImageFrame({
   aspect,
@@ -21,6 +28,10 @@ export function ImageFrame({
   className,
   frameRef,
   fillRef,
+  src,
+  alt,
+  priority,
+  objectPosition,
 }: ImageFrameProps) {
   return (
     <div
@@ -32,7 +43,18 @@ export function ImageFrame({
         ref={fillRef}
         className={`image-frame__fill ${parallax ? 'image-frame__fill--parallax' : ''}`}
       >
-        <span className="placeholder-caption">{caption}</span>
+        {src ? (
+          <img
+            src={src}
+            alt={alt ?? caption}
+            loading={priority ? 'eager' : 'lazy'}
+            className="image-frame__photo"
+            style={objectPosition ? { objectPosition } : undefined}
+            {...(priority ? { fetchpriority: 'high' } : {})}
+          />
+        ) : (
+          <span className="placeholder-caption">{caption}</span>
+        )}
       </div>
     </div>
   );

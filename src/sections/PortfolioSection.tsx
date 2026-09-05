@@ -57,6 +57,8 @@ function ProjectCard({
           <ImageFrame
             aspect={aspect}
             caption={`${project.title.toUpperCase()} — ${project.subtitle.toUpperCase()}`}
+            src={project.image.src || undefined}
+            alt={project.image.alt}
             fillRef={imageRef}
           />
         </div>
