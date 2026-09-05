@@ -520,6 +520,28 @@
   }
 }
 
+/* Below the nav's own mobile breakpoint, pair the 4 stats 2x2 instead of
+   auto-fit's single full-width column — the divider borders are rebuilt
+   for a grid rather than a single row (right-column left border,
+   second-row top border). */
+@media (max-width: 759px) {
+  .stats-block {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .stats-cell {
+    border-left: none;
+  }
+
+  .stats-cell:nth-child(even) {
+    border-left: 1px solid var(--rule);
+  }
+
+  .stats-cell:nth-child(n + 3) {
+    border-top: 1px solid var(--rule);
+  }
+}
+
 /* ============================================================
    ACCORDION (Services + FAQ)
    ============================================================ */
@@ -610,6 +632,26 @@
 
 .portfolio-card:hover .image-frame__fill {
   transform: scale(1.045);
+}
+
+.portfolio-card__image {
+  /* Lets the image grow to fill whatever height the row's align-items:stretch
+     hands this column (the feature card's aspect-ratio-driven image is
+     shorter than the stacked pair beside it, otherwise leaving dead space
+     above the caption) — the explicit height overrides the frame's own
+     aspect-ratio since both dimensions become definite, and object-fit:cover
+     on the photo absorbs the crop. */
+  display: flex;
+  flex: 1 1 auto;
+}
+
+.portfolio-card__image .image-frame {
+  flex: 1;
+  height: 100%;
+  /* Square off the bottom so the frame's own rounding doesn't peek out
+     against the caption strip directly below it — the card's outer
+     border-radius + overflow:hidden already rounds the whole unit. */
+  border-radius: 12px 12px 0 0;
 }
 
 .portfolio-card__image .image-frame__fill {
