@@ -3,6 +3,14 @@ import { prefersReducedMotion } from './useReducedMotion';
 
 export type RevealVariant = 'rise' | 'scale' | 'mask';
 
+// Matches .load-veil's animation: wndVeil 0.85s ease 0.45s both (tokens.css) —
+// delay + duration = 1.3s until the veil is fully transparent. Reveals wait
+// this long before even attaching their observer, so a browser-restored
+// scroll position (reload defaults to restoring it) can never let a section
+// finish revealing while still hidden behind the veil — see main.tsx for the
+// scrollRestoration fix this backs up.
+const VEIL_CLEAR_MS = 1300;
+
 /**
  * Scroll-reveal contract — BUILD-SPEC.md §5.2, extended with a small motion
  * vocabulary (rise/scale/mask) so sections don't all arrive the same way.
@@ -27,30 +35,36 @@ export function useReveal<T extends HTMLElement = HTMLDivElement>(
     if (!el) return;
 
     let done = false;
+    let observer: IntersectionObserver | undefined;
+    let failsafe: number | undefined;
+
     const reveal = () => {
       if (done) return;
       done = true;
       setRevealed(true);
     };
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            reveal();
-            observer.disconnect();
-          }
-        });
-      },
-      { rootMargin: '0px 0px -80px 0px', threshold: 0 }
-    );
-    observer.observe(el);
+    const start = window.setTimeout(() => {
+      observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              reveal();
+              observer?.disconnect();
+            }
+          });
+        },
+        { rootMargin: '0px 0px -80px 0px', threshold: 0 }
+      );
+      observer.observe(el);
 
-    const failsafe = window.setTimeout(reveal, 2500);
+      failsafe = window.setTimeout(reveal, 2500);
+    }, VEIL_CLEAR_MS);
 
     return () => {
-      observer.disconnect();
-      window.clearTimeout(failsafe);
+      window.clearTimeout(start);
+      observer?.disconnect();
+      if (failsafe !== undefined) window.clearTimeout(failsafe);
     };
   }, []);
 
