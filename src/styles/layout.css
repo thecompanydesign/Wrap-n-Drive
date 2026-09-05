@@ -650,6 +650,13 @@
   border-bottom: 1px solid var(--rule);
 }
 
+/* Mobile-only — see the comment at its usage in ProcessSection.tsx. */
+@media (max-width: 759px) {
+  .process-step--mobile-border {
+    border-bottom: 1px solid var(--rule);
+  }
+}
+
 /* ============================================================
    TESTIMONIALS
    ============================================================ */
